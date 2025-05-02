@@ -1,0 +1,12 @@
+MongoDB Database:
+    -Products(Collection/Table)
+        {
+            _id:Mongodb_Object_Id,
+            Featured:Boolean,
+            createdAt:DateTime,
+            name:String,
+            Price:Number,
+            Category:String
+        }
+
+Only Backend No Frontend
