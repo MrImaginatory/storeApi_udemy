@@ -80,18 +80,6 @@ storeApi_udemy/
 * `PUT /api/categories/:id`: Update an existing category.
 * `DELETE /api/categories/:id`: Delete a category.
 
-### Users
-
-* `POST /api/users/signup`: Register a new user.
-* `POST /api/users/login`: Authenticate a user and receive a JWT.
-
-## 🧪 Testing
-
-To run tests:
-
-```bash
-npm test
-```
 
 Ensure you have a test database set up and configured in your `.env` file.
 
