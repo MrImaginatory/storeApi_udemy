@@ -2,13 +2,67 @@ import { asyncWrapper } from "../utils/asyncWrapper.js";
 import storeSchema from "../models/store.model.js";
 
 const getAllProducts = asyncWrapper(async(req,res) => {
-    const products = await storeSchema.find();
+    const {featured, name, company, sort, fields, numericFilters} = req.query;
+    const queryObject = {};
+
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 5;
+    const skip = (page - 1) * limit;
+
+    if(featured){
+        queryObject.featured = featured === 'true' ? true:false;
+    }
+
+    if(company){
+        queryObject.company= company;
+    }
+
+    if(name){
+        queryObject.name = { $regex: name, $options: 'i' };
+    }
+
+    if (numericFilters) {
+        const operatorMap = {
+          '>': '$gt',
+          '>=': '$gte',
+          '=': '$eq',
+          '<': '$lt',
+          '<=': '$lte',
+        };
+        const regEx = /\b(<|>|>=|=|<|<=)\b/g;
+        let filters = numericFilters.replace(
+          regEx,
+          (match) => `-${operatorMap[match]}-`
+        );
+        const options = ['price', 'rating'];
+        filters = filters.split(',').forEach((item) => {
+          const [field, operator, value] = item.split('-');
+          if (options.includes(field)) {
+            queryObject[field] = { [operator]: Number(value) };
+          }
+        });
+      }
+    
+
+    console.log(queryObject);
+    
+    let result = storeSchema.find(queryObject);
+    if (sort) {
+      const sortList = sort.split(',').join(' ');
+      result = result.sort(sortList);
+    } else {
+      result = result.sort('createdAt');
+    }
+ 
+    result = result.skip(skip).limit(limit);
+    
+    const products = await result;
 
     if(products.length<=0){
         return res.status(404).json({message:"No Products Found Please Add one"})
     }
 
-    return res.status(200).json({products:products});
+    res.status(200).json({ products, nbHits: products.length });
 })
 
 const getOneProduct = asyncWrapper(async(req,res) => {

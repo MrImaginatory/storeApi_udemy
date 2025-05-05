@@ -10,3 +10,10 @@ MongoDB Database:
         }
 
 Only Backend No Frontend
+
+for sorting:
+    -first acquire all the QueryParams
+    -create an queryObject json/array
+    -fetch Data from db using find
+    -create an sortList and split at commas and join with spaces(sortList = sort.split(',').join(' '))
+    -apply sort on the data fetched

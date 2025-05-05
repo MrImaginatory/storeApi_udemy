@@ -25,10 +25,16 @@ const storeSchema = new mongoose.Schema({
             message: props => `${props.value} is not a valid price.`
         }
     },
-    category: {
+    company: {
         type: String,
-        enum: ["Consumable", "Non-Consumable"],
         required: true
+    },
+    rating:{
+        type:Number,
+        min:0,
+        max:5,
+        required:true,
+        default:0,
     }
 });
 
