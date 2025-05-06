@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MrImaginatory/nodeBackendStarterTemplate.git"
+    "url": "git+https://github.com/MrImaginatory/storeApi_udemy.git"
   },
   "author": "MrImaginatory",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MrImaginatory/nodeBackendStarterTemplate/issues"
+    "url": "https://github.com/MrImaginatory/storeApi_udemy/issues"
   },
-  "homepage": "https://github.com/MrImaginatory/nodeBackendStarterTemplate#readme",
+  "homepage": "https://github.com/MrImaginatory/storeApi_udemy#readme",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "dotenv": "^16.5.0",
